@@ -1,0 +1,38 @@
+CREATE OR REPLACE TRIGGER emp_delete_trigger 
+AFTER DELETE ON emp 
+FOR EACH ROW 
+DECLARE 
+BEGIN 
+ INSERT INTO Emp_Backup (id, name, salary) 
+ DBMS_OUTPUT.PUT_LINE('Deleted record backed up successfully.'); 
+END; 
+/ 
+CREATE TABLE Emp_Backup ( id NUMBER(10), name VARCHAR2(50), salary NUMBER(10,2) ); 
+delete from emp where emp_id=2;
+
+
+CREATE OR REPLACE TRIGGER employee_insert_trigger 
+AFTER INSERT ON emp 
+FOR EACH ROW 
+DECLARE 
+BEGIN 
+ IF :salary > 15000 THEN 
+ DBMS_OUTPUT.PUT_LINE('New record added to employees table with salary greater than 15000.'); 
+ END IF; 
+END; 
+/
+insert into emp values(18,'manniisshhh',6997845); 
+
+
+CREATE OR REPLACE TRIGGER salary_update_trigger 
+AFTER UPDATE OF salary ON emp 
+FOR EACH ROW 
+DECLARE 
+BEGIN 
+ DBMS_OUTPUT.PUT_LINE('Salary column updated for employee with ID ' 
+|| :OLD.emp_id || '.'); 
+END; 
+/ 
+
+update emp set salary = 650000 where emp_id =4; 
+

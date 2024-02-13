@@ -1,0 +1,19 @@
+declare 
+a number(5);
+b number(5);
+c number(5);
+large number(5);
+begin
+a:=&a;
+b:=&b;
+c:=&c;
+if a>b and a>c then
+large:=a;
+elsif b>a and b>c then
+large:=b;
+else 
+large:=c;
+end if;
+dbms_output.put_line('large='||large);
+end;
+/
